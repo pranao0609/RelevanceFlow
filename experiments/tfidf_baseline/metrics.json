@@ -1,0 +1,32 @@
+{
+  "experiment": "tfidf_baseline",
+  "model": "TF-IDF",
+  "fields": [
+    "product_name"
+  ],
+  "ngram_range": [
+    1,
+    2
+  ],
+  "min_df": 1,
+  "max_df": 0.95,
+  "sublinear_tf": true,
+  "lowercase": true,
+  "max_features": 200000,
+  "top_k": 10,
+  "fit_corpus": "training_product_names",
+  "validation": {
+    "queries_evaluated": 72,
+    "recall@10": 0.9861111111111112,
+    "mrr@10": 0.914814814814815,
+    "ndcg@10": 0.8789189674242757,
+    "map@10": 0.8877912043160886
+  },
+  "test": {
+    "queries_evaluated": 72,
+    "recall@10": 0.9722222222222222,
+    "mrr@10": 0.9288194444444444,
+    "ndcg@10": 0.9044623591006987,
+    "map@10": 0.9037538798955799
+  }
+}

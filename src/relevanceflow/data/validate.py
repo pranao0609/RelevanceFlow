@@ -274,10 +274,7 @@ def _check_empty_text(
     if empty_count > 0:
         result.add_error(
             f"{dataset_name}_{column}_not_empty",
-            (
-                f"{dataset_name}.{column} contains "
-                f"{empty_count:,} empty or null values."
-            ),
+            (f"{dataset_name}.{column} contains {empty_count:,} empty or null values."),
         )
         return
 
@@ -362,7 +359,7 @@ def _check_duplicate_judgment_ids(
     if duplicate_count > 0:
         result.add_error(
             "judgment_id_unique",
-            (f"Found {duplicate_count:,} rows with duplicate " "judgment IDs."),
+            (f"Found {duplicate_count:,} rows with duplicate judgment IDs."),
         )
         return
 

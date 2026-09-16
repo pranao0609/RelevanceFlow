@@ -137,13 +137,12 @@ def verify_query_disjointness(
 
     if train_test_overlap:
         raise SplitError(
-            "Train/test query overlap detected: " f"{sorted(train_test_overlap)}"
+            f"Train/test query overlap detected: {sorted(train_test_overlap)}"
         )
 
     if validation_test_overlap:
         raise SplitError(
-            "Validation/test query overlap detected: "
-            f"{sorted(validation_test_overlap)}"
+            f"Validation/test query overlap detected: {sorted(validation_test_overlap)}"
         )
 
 
@@ -232,7 +231,7 @@ def save_splits(
 
     if set(splits) != required_splits:
         raise SplitError(
-            "Splits must contain exactly: " "train, validation, validation, test."
+            "Splits must contain exactly: train, validation, validation, test."
         )
 
     output_paths = {

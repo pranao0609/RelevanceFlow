@@ -34,11 +34,7 @@ def main() -> None:
         query_count = dataframe["query_id"].nunique()
         row_count = len(dataframe)
 
-        print(
-            f"{split_name:12s} | "
-            f"queries={query_count:3d} | "
-            f"judgments={row_count:6d}"
-        )
+        print(f"{split_name:12s} | queries={query_count:3d} | judgments={row_count:6d}")
 
     print("=" * 60)
 
