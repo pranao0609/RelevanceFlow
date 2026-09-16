@@ -1,0 +1,33 @@
+# ============================================================
+# RelevanceFlow - Feature Configuration
+# ============================================================
+
+features:
+  lexical:
+    enabled: true
+
+  product_text:
+    enabled: true
+
+  metadata:
+    enabled: true
+
+  compatibility:
+    enabled: true
+
+  semantic:
+    enabled: false
+
+  bm25:
+    k1: 1.5
+    b: 0.75
+
+  tfidf:
+    ngram_range:
+      - 1
+      - 2
+    min_df: 1
+    max_df: 0.95
+    sublinear_tf: true
+    lowercase: true
+    max_features: 200000
