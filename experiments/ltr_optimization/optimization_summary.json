@@ -1,0 +1,9 @@
+{
+  "study_name": "relevanceflow_ltr",
+  "n_trials": 30,
+  "best_trial": 28,
+  "best_validation_ndcg@10": 0.93112094217387,
+  "optimization_time_seconds": 307.41237400006503,
+  "train_queries": 336,
+  "validation_queries": 72
+}

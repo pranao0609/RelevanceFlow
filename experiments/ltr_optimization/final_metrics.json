@@ -1,0 +1,53 @@
+{
+  "model": "LightGBM LambdaRank",
+  "optimization": {
+    "method": "Optuna",
+    "trials": 30,
+    "objective": "validation_ndcg@10",
+    "best_trial": 28,
+    "best_validation_ndcg@10": 0.93112094217387
+  },
+  "data": {
+    "train_rows": 156714,
+    "validation_rows": 28531,
+    "test_rows": 46628,
+    "train_queries": 336,
+    "validation_queries": 72,
+    "test_queries": 72
+  },
+  "training": {
+    "training_time_seconds": 6.0119885000167415
+  },
+  "validation": {
+    "recall@1": 0.012206771243316053,
+    "recall@5": 0.050792217122077106,
+    "recall@10": 0.08612352524692736,
+    "recall@20": 0.15789859773024575,
+    "mrr@10": 0.9583333333333334,
+    "ndcg@5": 0.9399842178931522,
+    "ndcg@10": 0.93112094217387,
+    "ndcg@20": 0.9170274713052926,
+    "map@10": 0.9461059036526134,
+    "queries_evaluated": 72,
+    "candidates_evaluated": 28531,
+    "inference_time_seconds": 0.15111630002502352,
+    "average_inference_ms_per_query": 2.0988375003475492,
+    "average_inference_ms_per_candidate": 0.005296565140549701
+  },
+  "test": {
+    "recall@1": 0.006218164954561023,
+    "recall@5": 0.030859920536006707,
+    "recall@10": 0.061000358300227035,
+    "recall@20": 0.11494328819274398,
+    "mrr@10": 0.9452932098765433,
+    "ndcg@5": 0.9214684676564912,
+    "ndcg@10": 0.9109186403735698,
+    "ndcg@20": 0.9133869611714738,
+    "map@10": 0.930406822579855,
+    "queries_evaluated": 72,
+    "candidates_evaluated": 46628,
+    "inference_time_seconds": 0.21431990002747625,
+    "average_inference_ms_per_query": 2.9766652781593925,
+    "average_inference_ms_per_candidate": 0.004596377713551434
+  }
+}
