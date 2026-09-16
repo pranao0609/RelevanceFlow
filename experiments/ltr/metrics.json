@@ -1,0 +1,56 @@
+{
+  "model": "LightGBM LGBMRanker",
+  "objective": "lambdarank",
+  "target": "relevance_score",
+  "label_mapping": {
+    "Irrelevant": 0,
+    "Partial": 1,
+    "Exact": 2
+  },
+  "group_column": "query_id",
+  "features": [
+    "bm25_score",
+    "tfidf_similarity",
+    "exact_match",
+    "token_overlap",
+    "character_overlap",
+    "query_title_overlap",
+    "title_length",
+    "description_length",
+    "feature_count",
+    "category_depth",
+    "average_rating",
+    "rating_count",
+    "review_count",
+    "category_match",
+    "product_class_match",
+    "phrase_match",
+    "semantic_similarity",
+    "query_embedding_norm",
+    "product_embedding_norm"
+  ],
+  "validation": {
+    "recall@1": 0.012116612593967374,
+    "ndcg@1": 0.9166666666666666,
+    "recall@5": 0.04950246824935258,
+    "ndcg@5": 0.9165090434496411,
+    "recall@10": 0.08611240057808374,
+    "ndcg@10": 0.9034602277702434,
+    "recall@20": 0.156209145199373,
+    "ndcg@20": 0.9013070923982853,
+    "mrr@10": 0.9353174603174603,
+    "map@10": 0.9152660877879958
+  },
+  "test": {
+    "recall@1": 0.006734005711485007,
+    "ndcg@1": 0.9305555555555556,
+    "recall@5": 0.03198358979178738,
+    "ndcg@5": 0.9108250458927135,
+    "recall@10": 0.05914411278239832,
+    "ndcg@10": 0.9167024290173865,
+    "recall@20": 0.11534478086293477,
+    "ndcg@20": 0.9148533893167934,
+    "mrr@10": 0.9490740740740742,
+    "map@10": 0.9264857288079842
+  }
+}
