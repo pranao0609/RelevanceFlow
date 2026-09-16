@@ -1,0 +1,48 @@
+# ============================================================
+# RelevanceFlow - Retrieval Configuration
+# ============================================================
+
+retrieval:
+  top_k: 10
+
+  evaluation:
+    top_k_values:
+      - 5
+      - 10
+      - 20
+
+# ------------------------------------------------------------
+# TF-IDF
+# ------------------------------------------------------------
+
+tfidf:
+  enabled: true
+
+  analyzer: "word"
+
+  ngram_range:
+    min: 1
+    max: 2
+
+  min_df: 1
+  max_df: 0.95
+
+  sublinear_tf: true
+
+  lowercase: true
+
+  max_features: 200000
+
+# ------------------------------------------------------------
+# BM25
+# ------------------------------------------------------------
+
+bm25:
+  enabled: true
+
+  k1: 1.5
+  b: 0.75
+
+  tokenizer:
+    lowercase: true
+    remove_punctuation: true

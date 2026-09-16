@@ -1,0 +1,57 @@
+# ============================================================
+# RelevanceFlow - Data Configuration
+# ============================================================
+
+dataset:
+  name: "WANDS"
+  source: "Wayfair WANDS"
+  version: "1.0"
+
+paths:
+  raw:
+    queries: "data/raw/query.csv"
+    products: "data/raw/product.csv"
+    labels: "data/raw/label.csv"
+
+  interim:
+    merged: "data/interim/query_product_labels.parquet"
+
+  processed:
+    train: "data/processed/train.parquet"
+    validation: "data/processed/validation.parquet"
+    test: "data/processed/test.parquet"
+
+split:
+  strategy: "group_query"
+  train_ratio: 0.70
+  validation_ratio: 0.15
+  test_ratio: 0.15
+  group_column: "query_id"
+  random_seed: 42
+
+validation:
+  required_query_columns:
+    - "query_id"
+    - "query"
+    - "query_class"
+
+  required_product_columns:
+    - "product_id"
+    - "product_name"
+    - "product_class"
+    - "category_hierarchy"
+    - "product_description"
+    - "product_features"
+    - "rating_count"
+    - "average_rating"
+    - "review_count"
+
+  required_label_columns:
+    - "query_id"
+    - "product_id"
+    - "label"
+
+  allowed_labels:
+    - "Exact"
+    - "Partial"
+    - "Irrelevant"

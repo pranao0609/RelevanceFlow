@@ -1,0 +1,72 @@
+# ============================================================
+# RelevanceFlow - Production Configuration
+# ============================================================
+
+production:
+  environment: "production"
+
+  api:
+    host: "0.0.0.0"
+    port: 8000
+
+    workers: 1
+
+    reload: false
+
+  inference:
+    top_k: 10
+
+    timeout_seconds: 5
+
+  model:
+    directory: "models"
+    active_model: "relevanceflow_ranker"
+
+  logging:
+    level: "INFO"
+
+# ------------------------------------------------------------
+# Database
+# ------------------------------------------------------------
+
+database:
+  url_env: "DATABASE_URL"
+  pool_size: 5
+  max_overflow: 10
+  pool_timeout: 30
+  pool_recycle: 1800
+
+# ------------------------------------------------------------
+# Redis
+# ------------------------------------------------------------
+
+redis:
+  url_env: "REDIS_URL"
+
+  enabled: false
+
+  ttl_seconds: 3600
+
+# ------------------------------------------------------------
+# MLflow
+# ------------------------------------------------------------
+
+mlflow:
+  tracking_uri_env: "MLFLOW_TRACKING_URI"
+
+  experiment_name: "relevanceflow"
+
+  registry_model_name: "relevanceflow-ranker"
+
+# ------------------------------------------------------------
+# AWS
+# ------------------------------------------------------------
+
+aws:
+  region_env: "AWS_REGION"
+
+  s3_bucket_env: "AWS_S3_BUCKET"
+
+  model_prefix: "models/relevanceflow"
+
+  enabled: false

@@ -1,0 +1,62 @@
+# ============================================================
+# RelevanceFlow - Ranking Configuration
+# ============================================================
+
+ranking:
+  relevance_labels:
+    Irrelevant: 0
+    Partial: 1
+    Exact: 2
+
+  primary_metric: "ndcg@10"
+
+  secondary_metrics:
+    - "mrr@10"
+    - "recall@10"
+    - "map@10"
+
+  candidate_cutoff: 100
+
+# ------------------------------------------------------------
+# Feature configuration
+# ------------------------------------------------------------
+
+features:
+  text:
+    enabled: true
+
+    fields:
+      query:
+        - "query"
+
+      product:
+        - "product_name"
+        - "product_class"
+        - "category_hierarchy"
+        - "product_description"
+        - "product_features"
+
+  lexical:
+    enabled: true
+
+    features:
+      - "query_product_token_overlap"
+      - "query_product_token_jaccard"
+      - "query_in_product_title"
+      - "query_length"
+      - "product_title_length"
+
+  categorical:
+    enabled: true
+
+    fields:
+      - "product_class"
+      - "category_hierarchy"
+
+  numerical:
+    enabled: true
+
+    fields:
+      - "rating_count"
+      - "average_rating"
+      - "review_count"

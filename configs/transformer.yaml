@@ -1,0 +1,29 @@
+# ============================================================
+# RelevanceFlow - Transformer Configuration
+# ============================================================
+
+transformer:
+  enabled: false
+
+  embedding_model:
+    name: "sentence-transformers/all-MiniLM-L6-v2"
+
+    device: "cpu"
+
+    batch_size: 32
+
+    normalize_embeddings: true
+
+    max_seq_length: 256
+
+  similarity:
+    metric: "cosine"
+
+  cross_encoder:
+    enabled: false
+
+    model_name: null
+
+    max_length: 256
+
+    batch_size: 16

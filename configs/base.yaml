@@ -1,0 +1,26 @@
+# ============================================================
+# RelevanceFlow - Base Configuration
+# ============================================================
+
+project:
+  name: "RelevanceFlow"
+  version: "0.1.0"
+  environment: "development"
+
+random_seed: 42
+
+logging:
+  level: "INFO"
+
+paths:
+  data_dir: "data"
+  raw_dir: "data/raw"
+  interim_dir: "data/interim"
+  processed_dir: "data/processed"
+  external_dir: "data/external"
+
+  models_dir: "models"
+  experiments_dir: "experiments"
+  reports_dir: "reports"
+
+  config_dir: "configs"
