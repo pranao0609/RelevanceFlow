@@ -38,7 +38,7 @@ htmlcov/
 .env
 .env.*
 !.env.example
-
+.ipynb_checkpoints/
 # Datasets & Large Files (DVC / Data)
 data/raw/*
 !data/raw/.gitkeep
