@@ -1,0 +1,5 @@
+model,true_positive,false_positive,false_negative,true_negative
+tfidf,629,82,29911,16006
+bm25,624,87,29916,16001
+supervised,670,41,29870,16047
+ltr,657,54,29883,16034

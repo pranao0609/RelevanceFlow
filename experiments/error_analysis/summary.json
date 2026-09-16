@@ -1,0 +1,27 @@
+{
+  "evaluation_scope": "Held-out WANDS test query groups",
+  "test_queries": 72,
+  "test_candidates": 46628,
+  "models": [
+    "TF-IDF",
+    "BM25",
+    "Supervised baseline",
+    "LightGBM LTR"
+  ],
+  "primary_metric": "NDCG@10",
+  "average_ndcg@10": {
+    "tfidf": 0.9319994200012367,
+    "bm25": 0.8847943413772755,
+    "supervised": 0.9299501326680368,
+    "ltr": 0.913203374741523
+  },
+  "bm25_better_query_count": 17,
+  "ltr_better_query_count": 21,
+  "tie_query_count": 34,
+  "failure_case_count": 29937,
+  "success_case_count": 21,
+  "ambiguous_query_count": 65,
+  "analysis_runtime_seconds": 22.76721359998919,
+  "ambiguity_definition": "Heuristic: a query is considered operationally ambiguous when its relevant products span at least two top-level product categories. This is not a WANDS ground-truth label.",
+  "evaluation_note": "All NDCG@10 calculations use the project's canonical ndcg_at_k implementation."
+}

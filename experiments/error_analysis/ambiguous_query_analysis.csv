@@ -1,0 +1,66 @@
+query_id,query,relevant_category_count,relevant_categories,candidate_count,relevant_count,bm25_ndcg@10,ltr_ndcg@10,ltr_minus_bm25
+222,small loving roomtables,2,Furniture | Outdoor,77,36,0.6303943463464078,0.0,-0.6303943463464078
+132,farmhouse cabinet,12,Baby & Kids | Commercial Business Furniture | Décor & Pillows | Furniture | Home Improvement | Kitchen & Tabletop | Outdoor | Pet | Sale | School Furniture and Supplies | Storage & Organization | Unknown,1260,591,0.8407559653022282,0.6127962621831762,-0.227959703119052
+45,70s inspired furniture,10,Baby & Kids | Bed & Bath | Commercial Business Furniture | Décor & Pillows | Furniture | Home Improvement | Outdoor | Reception Area | Storage & Organization | Unknown,169,107,0.9851514063429595,0.7665241578325118,-0.21862724851044768
+327,kohler purist brushed bronze,2,Bed & Bath | Home Improvement,116,89,1.0,0.8032285550939751,-0.19677144490602494
+325,outdoor waterproof chest,6,Baby & Kids | Décor & Pillows | Furniture | Outdoor | Protection Plans | Storage & Organization,120,86,0.5714285040141098,0.40298313359773236,-0.16844537041637747
+426,outdoor storage,16,Baby & Kids | Bed & Bath | Browse By Brand | Commercial Business Furniture | Contractor | Décor & Pillows | Foodservice | Furniture | Holiday Décor | Home Improvement | Kitchen & Tabletop | Outdoor | School Furniture and Supplies | Shop Product Type | Storage & Organization | Unknown,3254,1224,0.9851514063429596,0.8471779732814125,-0.13797343306154708
+126,leather dining chairs,8,Baby & Kids | Commercial Business Furniture | Furniture | Outdoor | Sale | School Furniture and Supplies | Shop Product Type | Unknown,719,678,0.9476171368560405,0.8125952066495404,-0.1350219302065001
+232,storage dresser,5,Baby & Kids | Foodservice | Furniture | School Furniture and Supplies | Storage & Organization,2329,574,1.0,0.90185575096193,-0.09814424903806995
+39,door jewelry organizer,5,Décor & Pillows | Furniture | Kitchen & Tabletop | Storage & Organization | Unknown,149,149,1.0,0.909323291293454,-0.09067670870654598
+18,chrome bathroom 4 light vanity light,5,Décor & Pillows | Home Improvement | Lighting | Sale | Unknown,1053,274,0.993216879066224,0.9470061337201198,-0.046210745346104254
+425,side table with storage,6,Commercial Business Furniture | Furniture | Outdoor | Sale | Storage & Organization | Unknown,743,720,0.9548073730884988,0.9124031819349625,-0.04240419115353633
+104,flour and sugar containers,2,Kitchen & Tabletop | Unknown,179,178,1.0,0.9664515752024124,-0.03354842479758757
+406,refrigerator with ice an water in door,4,Appliances | Home Improvement | Kitchen & Tabletop | Outdoor,98,77,0.7962372977085499,0.7695900200452496,-0.02664727766330033
+339,ruckus chair,5,Baby & Kids | Furniture | Outdoor | School Furniture and Supplies | Unknown,3044,104,0.9904025836274859,0.9638204223922388,-0.026582161235247148
+440,wood bar stools,2,Furniture | Outdoor,777,763,0.7827068917847372,0.767052670562042,-0.01565422122269522
+436,full bed with trundle,4,Baby & Kids | Bed Accessories | Furniture | Unknown,214,208,1.0,0.9911365418282455,-0.00886345817175449
+131,kids chair,14,Baby & Kids | Commercial Business Furniture | Contractor | Furniture | Home Improvement | Lighting | Outdoor | Protection Plans | Rugs | Sale | School Furniture and Supplies | Shop Product Type | Storage & Organization | Unknown,3479,1808,1.0,1.0,0.0
+148,industrial,15,Commercial Business Furniture | Contractor | Décor & Pillows | Furniture | Home Improvement | Hooks | Institutional Furniture Parts & Accessories | Kitchen & Tabletop | Lighting | Outdoor | Pet | Sale | School Furniture and Supplies | Storage & Organization | Unknown,249,197,1.0,1.0,0.0
+90,filaret outdoor sofa,3,Furniture | Outdoor | Storage & Organization,242,241,0.8328978515038055,0.8328978515038055,0.0
+82,bathroom vanity with counter space,5,Décor & Pillows | Furniture | Home Improvement | Lighting | Sale,668,654,1.0,1.0,0.0
+84,full metal bed rose gold,6,Baby & Kids | Bed & Bath | Décor & Pillows | Furniture | Sale | Unknown,299,209,1.0,1.0,0.0
+270,edge chair mat,3,Furniture | Rugs | Sale,95,94,1.0,1.0,0.0
+328,golub dining table,6,Furniture | Kitchen & Tabletop | Outdoor | Sale | School Furniture and Supplies | Unknown,659,647,1.0,1.0,0.0
+9,coffee table fire pit,6,Décor & Pillows | Furniture | Outdoor | Sale | Storage & Organization | Unknown,1516,1510,1.0,1.0,0.0
+57,jordanna solid wood rocking,6,Baby & Kids | Furniture | Home Improvement | Outdoor | Storage & Organization | Unknown,1406,190,1.0,1.0,0.0
+25,sunflower,11,Baby & Kids | Bed & Bath | Décor & Pillows | Holiday Décor | Home Improvement | Kitchen & Tabletop | Lighting | Outdoor | Rugs | Storage & Organization | Unknown,242,231,1.0,1.0,0.0
+78,dorel vanity,6,Décor & Pillows | Furniture | Home Improvement | Kitchen & Tabletop | Lighting | Sale,948,853,1.0,1.0,0.0
+73,certified international melamine,6,Décor & Pillows | Furniture | Kitchen & Tabletop | Outdoor | Storage & Organization | Unknown,181,159,1.0,1.0,0.0
+19,gurney slade 56,4,Décor & Pillows | Furniture | Lighting | Unknown,14,10,1.0,1.0,0.0
+31,burnt orange curtains,4,Décor & Pillows | Lighting | Rugs | Sale,168,168,1.0,1.0,0.0
+16,blk 18x18 seat cushions,9,Décor & Pillows | Ergonomic Accessories | Furniture | Furniture Cushions | Kitchen & Tabletop | Outdoor | School Furniture and Supplies | Shop Product Type | Unknown,493,266,1.0,1.0,0.0
+11,ombre rug,5,Bath Rugs & Mats | Bed & Bath | Rugs | Sale | Unknown,1428,1420,1.0,1.0,0.0
+427,lowes tile,4,Décor & Pillows | Furniture | Home Improvement | Sale,1125,626,1.0,1.0,0.0
+448,bed side table,2,Furniture | Outdoor,203,198,1.0,1.0,0.0
+414,shower hooks,7,Bed & Bath | Contractor | Décor & Pillows | Home Improvement | Sale | Shower Curtain Rods | Storage & Organization,914,375,1.0,1.0,0.0
+408,girl reading statue,3,Décor & Pillows | Outdoor | Unknown,102,102,1.0,1.0,0.0
+326,bowersville ladder writing desk,3,Baby & Kids | Furniture | Sale,284,283,1.0,1.0,0.0
+397,maryford queen tufted bed,2,Baby & Kids | Furniture,493,491,1.0,1.0,0.0
+405,queen ann style living room chair,5,Baby & Kids | Commercial Business Furniture | Furniture | Outdoor | Protection Plans,446,345,1.0,1.0,0.0
+377,glinda upholstered bench,2,Furniture | Storage & Organization,134,134,1.0,1.0,0.0
+470,elephant framed,3,Baby & Kids | Décor & Pillows | School Furniture and Supplies,638,285,1.0,1.0,0.0
+238,outdoor seat/back cushion,4,Furniture | Kitchen & Tabletop | Outdoor | Unknown,318,317,1.0,1.0,0.0
+252,accent chairs living room,4,Commercial Business Furniture | Furniture | Protection Plans | Shop Product Type,443,358,1.0,1.0,0.0
+306,mobley zero gravity adjustable bed with wireless remote,3,Bed & Bath | Furniture | Unknown,114,90,1.0,1.0,0.0
+285,"48"" sliding single track , barn door for laundry",4,Décor & Pillows | Home Improvement | Sale | Storage & Organization,183,115,1.0,1.0,0.0
+265,candace wingback upholstered bed,4,Baby & Kids | Furniture | Pet | Sale,690,675,1.0,1.0,0.0
+253,antique brass faucet,2,Home Improvement | School Furniture and Supplies,117,116,0.9971876401972103,1.0,0.00281235980278971
+153,bohemian,10,Baby & Kids | Bed & Bath | Décor & Pillows | Furniture | Kitchen & Tabletop | Lighting | Outdoor | Rugs | Sale | Unknown,178,153,0.9897119920294625,1.0,0.010288007970537527
+337,iittala bowl,5,Décor & Pillows | Kitchen & Tabletop | Outdoor | Pet | Unknown,201,121,0.7926538385165374,0.8125952066495404,0.019941368133003068
+5,sofa with ottoman,10,Baby & Kids | Bed & Bath | Décor & Pillows | Furniture | Outdoor | Pet | Reception Area | Sale | School Furniture and Supplies | Unknown,1344,1309,0.9452902205982653,0.9661161606824572,0.02082594008419192
+15,black 5 drawer dresser by guilford,3,Baby & Kids | Furniture | Storage & Organization,613,598,0.8593407951742595,0.8871958738785231,0.027855078704263514
+23,stoneford end tables white and wood,10,Baby & Kids | Commercial Business Furniture | Décor & Pillows | Furniture | Lighting | Outdoor | Pet | Sale | School Furniture and Supplies | Unknown,1266,1228,0.9667147927059907,1.0,0.0332852072940093
+206,grill cover 73,2,Outdoor | Storage & Organization,67,59,0.9664515752024124,1.0,0.03354842479758757
+70,annex dresser,4,Baby & Kids | Décor & Pillows | Furniture | Storage & Organization,504,503,0.9453409181812843,1.0,0.054659081818715705
+364,croscill ashton,13,Baby & Kids | Bed & Bath | Décor & Pillows | Furniture | Home Improvement | Kitchen & Tabletop | Lighting | Outdoor | Pet | Rugs | Sale | Storage & Organization | Unknown,114,45,0.9196461703481418,0.9830168297915421,0.06337065944340037
+336,mystic swivel,6,Baby & Kids | Furniture | Home Improvement | Lighting | Outdoor | Sale,360,343,0.91674788926343,1.0,0.08325211073657002
+307,real touch roses floral arrangements in glass vase,3,Décor & Pillows | Sale | Unknown,189,173,0.9154690441477004,1.0,0.08453095585229964
+93,outdoor sectional dining,2,Furniture | Outdoor,233,221,0.627095935777717,0.754368695647985,0.12727275987026798
+76,46 inch closet door,3,Home Improvement | Sale | Storage & Organization,135,55,0.6967564500834763,0.876848805629635,0.18009235554615866
+439,parsons chairs,11,Baby & Kids | Commercial Business Furniture | Contractor | Furniture | Outdoor | Physical Education Equipment | Protection Plans | Sale | School Furniture and Supplies | Shop Product Type | Unknown,3276,2432,0.8007194814268488,1.0,0.1992805185731512
+24,wood coffee table set by storage,9,Baby & Kids | Commercial Business Furniture | Décor & Pillows | Furniture | Outdoor | Sale | School Furniture and Supplies | Storage & Organization | Unknown,2560,2100,0.7778671768025933,1.0,0.22213282319740668
+72,fold in half table,5,Baby & Kids | Furniture | Outdoor | Sale | School Furniture and Supplies,174,163,0.7291814281553078,1.0,0.27081857184469216
+481,emma headboard,3,Baby & Kids | Furniture | Unknown,219,211,0.6727121162120745,1.0,0.3272878837879255
+68,nautical platters,6,Décor & Pillows | Kitchen & Tabletop | Outdoor | Sale | Serving Dishes & Platters | Unknown,204,168,0.0,0.9692940899740545,0.9692940899740545
+345,oriental vanity,6,Décor & Pillows | Furniture | Home Improvement | Lighting | Rugs | Sale,1148,757,0.0,1.0,1.0
