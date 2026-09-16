@@ -40,14 +40,34 @@ htmlcov/
 !.env.example
 .ipynb_checkpoints/
 # Datasets & Large Files (DVC / Data)
+
+# Raw / processed / external data are ignored.
 data/raw/*
-!data/raw/.gitkeep
 data/interim/*
-!data/interim/.gitkeep
 data/processed/*
-!data/processed/.gitkeep
 data/external/*
+
+# Keep directories traversable by Git so DVC metadata can be tracked.
+!data/raw/
+!data/interim/
+!data/processed/
+!data/external/
+
+# Keep placeholder files.
+!data/raw/.gitkeep
+!data/interim/.gitkeep
+!data/processed/.gitkeep
 !data/external/.gitkeep
+
+# DVC metadata files must be tracked by Git.
+!data/raw/*.dvc
+!data/interim/*.dvc
+!data/processed/*.dvc
+!data/external/*.dvc
+
+# DVC internal storage must NOT be tracked.
+.dvc/cache
+.dvc/local
 
 # Model Artifacts & Heavy Experiments
 models/*.bin

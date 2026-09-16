@@ -1,0 +1,6 @@
+outs:
+- md5: 39be63f5b63f8612f167c0d794a5c058.dir
+  size: 96377307
+  nfiles: 3
+  hash: md5
+  path: wands
