@@ -17,9 +17,6 @@ class FakeInferenceService:
             for index, product in enumerate(products[:top_k])
         ]
 
-    def _initialize(self):
-        return None
-
 
 def override_inference_service():
     return FakeInferenceService()
@@ -49,6 +46,8 @@ def test_health_endpoint():
     assert body["status"] == "ok"
     assert body["model"] == "RelevanceFlowRanker"
     assert body["alias"] == "champion"
+
+    assert "X-Request-ID" in response.headers
 
 
 def test_rank_endpoint():
@@ -98,6 +97,8 @@ def test_rank_endpoint():
 
     assert body["results"][1]["product_id"] == 2
     assert body["results"][1]["rank"] == 2
+
+    assert "X-Request-ID" in response.headers
 
 
 def test_rank_rejects_empty_query():
