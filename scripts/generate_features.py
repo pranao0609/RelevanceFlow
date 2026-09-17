@@ -26,15 +26,13 @@ DATA_DIR = PROJECT_ROOT / "data" / "processed" / "wands"
 OUTPUT_DIR = PROJECT_ROOT / "data" / "features"
 
 
-def load_data() -> (
-    tuple[
-        pd.DataFrame,
-        pd.DataFrame,
-        pd.DataFrame,
-        pd.DataFrame,
-        pd.DataFrame,
-    ]
-):
+def load_data() -> tuple[
+    pd.DataFrame,
+    pd.DataFrame,
+    pd.DataFrame,
+    pd.DataFrame,
+    pd.DataFrame,
+]:
     """Load processed WANDS datasets."""
     products = pd.read_parquet(DATA_DIR / "products.parquet")
     queries = pd.read_parquet(DATA_DIR / "queries.parquet")
