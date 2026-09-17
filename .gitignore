@@ -68,7 +68,13 @@ data/external/*
 # DVC internal storage must NOT be tracked.
 .dvc/cache
 .dvc/local
-
+# MLflow local tracking database
+mlflow.db
+mlflow.db-shm
+mlflow.db-wal
+mlruns/
+# MLflow local artifacts
+mlartifacts/
 # Model Artifacts & Heavy Experiments
 models/*.bin
 models/*.pt

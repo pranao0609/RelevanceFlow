@@ -52,11 +52,9 @@ redis:
 # ------------------------------------------------------------
 
 mlflow:
-  tracking_uri_env: "MLFLOW_TRACKING_URI"
-
-  experiment_name: "relevanceflow"
-
-  registry_model_name: "relevanceflow-ranker"
+  enabled: true
+  tracking_uri: "sqlite:///mlflow.db"
+  experiment_name: "relevanceflow-ranking"
 
 # ------------------------------------------------------------
 # AWS
