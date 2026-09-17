@@ -1,0 +1,61 @@
+{
+  "model": "LightGBMClassifier",
+  "experiment": "semantic_enhanced_supervised_baseline",
+  "objective": "multiclass",
+  "target": "relevance_score",
+  "label_mapping": {
+    "Irrelevant": 0,
+    "Partial": 1,
+    "Exact": 2
+  },
+  "semantic_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "semantic_features": [
+    "semantic_similarity",
+    "query_embedding_norm",
+    "product_embedding_norm"
+  ],
+  "num_features": 17,
+  "features": [
+    "bm25_score",
+    "tfidf_similarity",
+    "exact_match",
+    "token_overlap",
+    "character_overlap",
+    "query_title_overlap",
+    "title_length",
+    "description_length",
+    "feature_count",
+    "category_depth",
+    "average_rating",
+    "rating_count",
+    "review_count",
+    "category_match",
+    "product_class_match",
+    "phrase_match",
+    "semantic_similarity"
+  ],
+  "validation": {
+    "recall@1": 0.01437693820817295,
+    "ndcg@1": 0.9861111111111112,
+    "recall@5": 0.06037879485944694,
+    "ndcg@5": 0.9497446306238184,
+    "recall@10": 0.10211992804927929,
+    "ndcg@10": 0.9318926545523928,
+    "recall@20": 0.17544616897910925,
+    "ndcg@20": 0.9223050347072727,
+    "mrr@10": 0.9930555555555556,
+    "map@10": 0.9770615827349458
+  },
+  "test": {
+    "recall@1": 0.0069432604497118465,
+    "ndcg@1": 0.9583333333333334,
+    "recall@5": 0.03411093360656251,
+    "ndcg@5": 0.9398994116429313,
+    "recall@10": 0.0635242997990385,
+    "ndcg@10": 0.929549464466164,
+    "recall@20": 0.11984580272268773,
+    "ndcg@20": 0.9254701280164321,
+    "mrr@10": 0.9699074074074076,
+    "map@10": 0.9570428853125615
+  }
+}

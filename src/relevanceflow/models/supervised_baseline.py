@@ -32,6 +32,8 @@ class SupervisedBaseline:
         "product_id",
         "relevance_score",
         "label",
+        "query_embedding_norm",
+        "product_embedding_norm",
     }
 
     def __init__(
