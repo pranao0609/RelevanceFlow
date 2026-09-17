@@ -1,25 +1,28 @@
 {
-  "experiment": "bm25_baseline",
   "model": "BM25",
-  "fields": [
-    "product_name"
-  ],
-  "k1": 1.5,
-  "b": 0.75,
-  "top_k": 10,
-  "fit_corpus": "training_associated_product_names",
-  "train_products": 40271,
-  "vocabulary_size": 28787,
-  "avg_document_length": 6.76104392739192,
-  "index_creation_time_seconds": 0.2844182000262663,
-  "estimated_index_memory_bytes": 886937,
+  "evaluation_protocol": {
+    "candidate_source": "WANDS judged query-product candidates",
+    "ranking_cutoff": 10,
+    "split_strategy": "query_grouped",
+    "bm25_fit_scope": "training-associated products only"
+  },
+  "config": {
+    "k1": 1.5,
+    "b": 0.75
+  },
+  "training": {
+    "total_products": 42994,
+    "training_products": 40271,
+    "training_queries": 336,
+    "fit_time_seconds": 0.3742153000785038
+  },
   "validation": {
     "queries_evaluated": 72,
     "recall@10": 0.9861111111111112,
     "mrr@10": 0.9357804232804234,
     "ndcg@10": 0.8975446749541136,
     "map@10": 0.9144511478717001,
-    "average_query_latency_ms": 2.9204347148253067
+    "average_query_latency_ms": 5.503025006166556
   },
   "test": {
     "queries_evaluated": 72,
@@ -27,6 +30,9 @@
     "mrr@10": 0.8990740740740742,
     "ndcg@10": 0.8854435576115569,
     "map@10": 0.8812043773270626,
-    "average_query_latency_ms": 3.9908305512249673
+    "average_query_latency_ms": 7.936216656364397
+  },
+  "artifacts": {
+    "test_predictions": "experiments\\bm25_baseline\\test_predictions.csv"
   }
 }

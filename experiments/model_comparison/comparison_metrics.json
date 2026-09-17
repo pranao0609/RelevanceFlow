@@ -1,0 +1,43 @@
+{
+  "evaluation_protocol": {
+    "ground_truth": "complete WANDS test candidate sets",
+    "ranking_cutoff": 10,
+    "relevance_definition": "relevance_score > 0 for Recall/MRR/MAP; graded 0/1/2 for NDCG",
+    "evaluation_method": "common ranking evaluator",
+    "prediction_source": "saved model rankings"
+  },
+  "models": [
+    {
+      "model": "TF-IDF",
+      "queries_evaluated": 72,
+      "recall@10": 0.0596998278608456,
+      "mrr@10": 0.9618055555555556,
+      "ndcg@10": 0.6890501894467325,
+      "map@10": 0.8437461419753086
+    },
+    {
+      "model": "BM25",
+      "queries_evaluated": 72,
+      "recall@10": 0.05984479286752579,
+      "mrr@10": 0.8990740740740741,
+      "ndcg@10": 0.6942057508442847,
+      "map@10": 0.8230908289241623
+    },
+    {
+      "model": "Transformer",
+      "queries_evaluated": 72,
+      "recall@10": 0.06366562795849601,
+      "mrr@10": 0.9699074074074073,
+      "ndcg@10": 0.7515176829713229,
+      "map@10": 0.8996803350970018
+    },
+    {
+      "model": "Hybrid LightGBM LTR",
+      "queries_evaluated": 72,
+      "recall@10": 0.062343368311560066,
+      "mrr@10": 0.93369708994709,
+      "ndcg@10": 0.7423509690302058,
+      "map@10": 0.8771301807760141
+    }
+  ]
+}

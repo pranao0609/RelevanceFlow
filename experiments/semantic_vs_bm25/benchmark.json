@@ -10,13 +10,13 @@
     "embedding_dimension": 384,
     "query_embeddings": 480,
     "product_embeddings": 42994,
-    "avg_query_ranking_latency_ms": 20.792279169351485
+    "avg_query_ranking_latency_ms": 19.842120834962568
   },
   "bm25": {
     "documents": 40271,
     "vocabulary_size": 28787,
-    "index_creation_time_seconds": 0.30995469994377345,
+    "index_creation_time_seconds": 0.2716808000113815,
     "estimated_memory_bytes": 886937,
-    "avg_query_latency_ms": 4.349361122068431
+    "avg_query_latency_ms": 3.916259719214092
   }
 }

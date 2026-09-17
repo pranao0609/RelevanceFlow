@@ -1,0 +1,37 @@
+{
+  "n_estimators": 500,
+  "learning_rate": 0.05,
+  "num_leaves": 31,
+  "max_depth": -1,
+  "min_child_samples": 20,
+  "subsample": 0.8,
+  "colsample_bytree": 0.8,
+  "reg_alpha": 0.0,
+  "reg_lambda": 0.0,
+  "random_state": 42,
+  "eval_at": [
+    5,
+    10,
+    20
+  ],
+  "early_stopping_rounds": 50,
+  "feature_columns": [
+    "bm25_score",
+    "tfidf_similarity",
+    "exact_match",
+    "token_overlap",
+    "character_overlap",
+    "query_title_overlap",
+    "title_length",
+    "description_length",
+    "feature_count",
+    "category_depth",
+    "average_rating",
+    "rating_count",
+    "review_count",
+    "category_match",
+    "product_class_match",
+    "phrase_match",
+    "semantic_similarity"
+  ]
+}

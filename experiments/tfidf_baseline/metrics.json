@@ -1,32 +1,45 @@
 {
-  "experiment": "tfidf_baseline",
   "model": "TF-IDF",
-  "fields": [
-    "product_name"
-  ],
-  "ngram_range": [
-    1,
-    2
-  ],
-  "min_df": 1,
-  "max_df": 0.95,
-  "sublinear_tf": true,
-  "lowercase": true,
-  "max_features": 200000,
-  "top_k": 10,
-  "fit_corpus": "training_product_names",
+  "evaluation_protocol": {
+    "candidate_source": "WANDS judged query-product candidates",
+    "ranking_cutoff": 10,
+    "split_strategy": "query_grouped",
+    "tfidf_fit_scope": "training-associated products only"
+  },
+  "config": {
+    "ngram_range": [
+      1,
+      2
+    ],
+    "min_df": 1,
+    "max_df": 0.95,
+    "sublinear_tf": true,
+    "lowercase": true,
+    "max_features": 200000
+  },
+  "training": {
+    "total_products": 42994,
+    "training_products": 40271,
+    "training_queries": 336,
+    "fit_time_seconds": 1.2821157000726089
+  },
   "validation": {
     "queries_evaluated": 72,
     "recall@10": 0.9861111111111112,
-    "mrr@10": 0.914814814814815,
-    "ndcg@10": 0.8789189674242757,
-    "map@10": 0.8877912043160886
+    "mrr@10": 0.9212962962962963,
+    "ndcg@10": 0.8753423484312841,
+    "map@10": 0.8975466987206404,
+    "average_query_latency_ms": 16.744743052792426
   },
   "test": {
     "queries_evaluated": 72,
-    "recall@10": 0.9722222222222222,
-    "mrr@10": 0.9288194444444444,
-    "ndcg@10": 0.9044623591006987,
-    "map@10": 0.9037538798955799
+    "recall@10": 0.9861111111111112,
+    "mrr@10": 0.9618055555555556,
+    "ndcg@10": 0.9319994200012367,
+    "map@10": 0.9302698998838219,
+    "average_query_latency_ms": 22.081733335249332
+  },
+  "artifacts": {
+    "test_predictions": "experiments\\tfidf_baseline\\test_predictions.csv"
   }
 }

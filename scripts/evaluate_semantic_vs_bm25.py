@@ -178,7 +178,7 @@ def main() -> None:
 
     semantic_predictions = {}
     semantic_latencies = []
-
+    semantic_prediction_rows = []
     for query_id, group in test.groupby(
         "query_id",
         sort=False,
@@ -202,6 +202,15 @@ def main() -> None:
         semantic_predictions[int(query_id)] = [
             result["product_id"] for result in results
         ]
+        for rank, result in enumerate(results, start=1):
+            semantic_prediction_rows.append(
+                {
+                    "query_id": int(query_id),
+                    "product_id": int(result["product_id"]),
+                    "score": float(result["score"]),
+                    "rank": rank,
+                }
+            )
 
     semantic_metrics = evaluate_predictions(
         semantic_predictions,
@@ -282,7 +291,10 @@ def main() -> None:
     print("========================================")
 
     print(comparison.to_string(index=False))
-
+    pd.DataFrame(semantic_prediction_rows).to_csv(
+        OUTPUT_DIR / "test_predictions.csv",
+        index=False,
+    )
     comparison.to_csv(
         OUTPUT_DIR / "comparison.csv",
         index=False,
