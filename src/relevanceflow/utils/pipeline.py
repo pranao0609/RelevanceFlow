@@ -6,7 +6,7 @@ import platform
 import subprocess
 import sys
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -74,7 +74,7 @@ def get_file_sha256(path: Path) -> str:
 
 def utc_now() -> str:
     """Return the current UTC timestamp."""
-    return datetime.now(timezone.utc).isoformat()
+    return datetime.now(UTC).isoformat()
 
 
 def build_pipeline_manifest(

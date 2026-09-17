@@ -67,10 +67,13 @@ def test_register_run_model():
 
 
 def test_register_run_model_error():
-    with patch(
-        "relevanceflow.utils.model_registry.mlflow.register_model",
-        side_effect=RuntimeError("registration failed"),
-    ), pytest.raises(ModelRegistryError):
+    with (
+        patch(
+            "relevanceflow.utils.model_registry.mlflow.register_model",
+            side_effect=RuntimeError("registration failed"),
+        ),
+        pytest.raises(ModelRegistryError),
+    ):
         register_run_model(
             run_id="run123",
             artifact_path="ranker",

@@ -1,6 +1,55 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "relevanceflow"
+version = "0.1.0"
+description = "E-commerce product search relevance and ranking platform"
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+
+dependencies = [
+    "numpy",
+    "pandas",
+    "scipy",
+    "scikit-learn",
+    "pyarrow",
+    "PyYAML",
+    "rank-bm25",
+    "lightgbm",
+    "mlflow",
+    "sentence-transformers",
+    "torch",
+    "fastapi",
+    "uvicorn",
+    "pydantic",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
 [tool.pytest.ini_options]
-pythonpath = "."
+pythonpath = ["src"]
 testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 88
+target-version = "py311"
 
 [tool.ruff.lint.flake8-bugbear]
-extend-immutable-calls = ["fastapi.Depends", "fastapi.Query", "fastapi.Path", "fastapi.Header", "fastapi.Body"]
+extend-immutable-calls = [
+    "fastapi.Depends",
+    "fastapi.Query",
+    "fastapi.Path",
+    "fastapi.Header",
+    "fastapi.Body",
+]
+
+[tool.black]
+line-length = 88
+target-version = ["py311"]
