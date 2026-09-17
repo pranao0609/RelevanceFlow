@@ -1,0 +1,9 @@
+features_cache:
+  enabled: true
+
+  manifest_path: "experiments/features/feature_manifest.json"
+
+  artifacts:
+    train: "data/features/train_features.parquet"
+    validation: "data/features/validation_features.parquet"
+    test: "data/features/test_features.parquet"

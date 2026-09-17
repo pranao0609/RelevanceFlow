@@ -1,0 +1,182 @@
+{
+  "artifacts": {
+    "test": {
+      "exists": true,
+      "path": "D:\\RelevanceFlow\\data\\features\\test_features.parquet",
+      "sha256": "521a2d5f5b1521536056ed56be4d062a708f1ea9eb47900dfabceaac7c8983fc",
+      "size_bytes": 1036810
+    },
+    "train": {
+      "exists": true,
+      "path": "D:\\RelevanceFlow\\data\\features\\train_features.parquet",
+      "sha256": "2beb92e8827d5c8da854e1ff9879361938a696b24b138069aab519c245dd2042",
+      "size_bytes": 3276953
+    },
+    "validation": {
+      "exists": true,
+      "path": "D:\\RelevanceFlow\\data\\features\\validation_features.parquet",
+      "sha256": "8af9c3a2da5689d4b42f539d6b64601c219909ed2c14c9e811e3478c2cb69145",
+      "size_bytes": 698979
+    }
+  },
+  "cache_type": "feature_artifacts",
+  "created_at_utc": "2026-09-17T09:37:38.798199+00:00",
+  "fingerprint": "14c863f0404ef2eba1c9ccd14c472cf17744ed8c785350c2e53e0512c642b4a9",
+  "fingerprint_inputs": {
+    "feature_config": {
+      "features": {
+        "bm25": {
+          "b": 0.75,
+          "k1": 1.5
+        },
+        "compatibility": {
+          "enabled": true
+        },
+        "lexical": {
+          "enabled": true
+        },
+        "metadata": {
+          "enabled": true
+        },
+        "product_text": {
+          "enabled": true
+        },
+        "semantic": {
+          "enabled": false
+        },
+        "tfidf": {
+          "lowercase": true,
+          "max_df": 0.95,
+          "max_features": 200000,
+          "min_df": 1,
+          "ngram_range": [
+            1,
+            2
+          ],
+          "sublinear_tf": true
+        }
+      }
+    },
+    "fingerprint_version": "1",
+    "processed_data": {
+      "judgments": {
+        "exists": true,
+        "path": "D:\\RelevanceFlow\\data\\processed\\wands\\judgments.parquet",
+        "sha256": "4e69a1d22fc8369208c6954b18456df29a3ed50c6971eed895018932b979adfe",
+        "size_bytes": 785836
+      },
+      "products": {
+        "exists": true,
+        "path": "D:\\RelevanceFlow\\data\\processed\\wands\\products.parquet",
+        "sha256": "d466eb6c50f1952ef59d1c01a6557eab1856d6b52d57674e09fa07c6f42ea529",
+        "size_bytes": 28799621
+      },
+      "queries": {
+        "exists": true,
+        "path": "D:\\RelevanceFlow\\data\\processed\\wands\\queries.parquet",
+        "sha256": "f4cad0a588d1c35605ab684af2454742c3fa3f669ed0ea2f27175d60d808c724",
+        "size_bytes": 16498
+      }
+    },
+    "retrieval_config": {
+      "bm25": {
+        "b": 0.75,
+        "enabled": true,
+        "k1": 1.5,
+        "tokenizer": {
+          "lowercase": true,
+          "remove_punctuation": true
+        }
+      },
+      "retrieval": {
+        "evaluation": {
+          "top_k_values": [
+            5,
+            10,
+            20
+          ]
+        },
+        "top_k": 10
+      },
+      "tfidf": {
+        "analyzer": "word",
+        "enabled": true,
+        "lowercase": true,
+        "max_df": 0.95,
+        "max_features": 200000,
+        "min_df": 1,
+        "ngram_range": {
+          "max": 2,
+          "min": 1
+        },
+        "sublinear_tf": true
+      }
+    },
+    "source_files": {
+      "D:\\RelevanceFlow\\scripts\\generate_features.py": {
+        "exists": true,
+        "path": "D:\\RelevanceFlow\\scripts\\generate_features.py",
+        "sha256": "d15220e2ed981e240569df0f12b2f0843be9108cdd65cb10925f81fb9158eb94",
+        "size_bytes": 7492
+      },
+      "D:\\RelevanceFlow\\src\\relevanceflow\\features\\compatibility.py": {
+        "exists": true,
+        "path": "D:\\RelevanceFlow\\src\\relevanceflow\\features\\compatibility.py",
+        "sha256": "ad610d4e12e8719fb0969e50f893da2a09212e455326a94bb88943bc16c1c626",
+        "size_bytes": 1738
+      },
+      "D:\\RelevanceFlow\\src\\relevanceflow\\features\\lexical.py": {
+        "exists": true,
+        "path": "D:\\RelevanceFlow\\src\\relevanceflow\\features\\lexical.py",
+        "sha256": "35f4155c9cb113efe6d8b6ab471e09fceff44a9ee894fccc81f93eba980cfa57",
+        "size_bytes": 2957
+      },
+      "D:\\RelevanceFlow\\src\\relevanceflow\\features\\metadata.py": {
+        "exists": true,
+        "path": "D:\\RelevanceFlow\\src\\relevanceflow\\features\\metadata.py",
+        "sha256": "365d4a6d69d8b31f40ed4ea7eca98b6c90d5eb8b2d1094b52b95486d4a9612e5",
+        "size_bytes": 711
+      },
+      "D:\\RelevanceFlow\\src\\relevanceflow\\features\\pipeline.py": {
+        "exists": true,
+        "path": "D:\\RelevanceFlow\\src\\relevanceflow\\features\\pipeline.py",
+        "sha256": "d3e595872a4e7081f84d5b7b424bb328a8067c29e2a8f00fd42e0ddba6e7e33e",
+        "size_bytes": 4570
+      },
+      "D:\\RelevanceFlow\\src\\relevanceflow\\features\\semantic.py": {
+        "exists": true,
+        "path": "D:\\RelevanceFlow\\src\\relevanceflow\\features\\semantic.py",
+        "sha256": "22cc4235316cc02fe3fa454f929e0026a635024b1cd2d777a0361d05b5fbf3d8",
+        "size_bytes": 1706
+      },
+      "D:\\RelevanceFlow\\src\\relevanceflow\\features\\text.py": {
+        "exists": true,
+        "path": "D:\\RelevanceFlow\\src\\relevanceflow\\features\\text.py",
+        "sha256": "8d1b62da4879d89d7d2524a92c69881ff8561619c1f6efb99b03aac81c905921",
+        "size_bytes": 1655
+      }
+    },
+    "splits": {
+      "test": {
+        "exists": true,
+        "path": "D:\\RelevanceFlow\\data\\processed\\wands\\test.parquet",
+        "sha256": "ef508f1fd83b3b44a7228faeb46495f58498974332884f277d93956b8b126643",
+        "size_bytes": 216110
+      },
+      "train": {
+        "exists": true,
+        "path": "D:\\RelevanceFlow\\data\\processed\\wands\\train.parquet",
+        "sha256": "b4aae9e8f1d14f1b47ab05e6cd108b846ff28610725a729e9bcf7af51df89326",
+        "size_bytes": 572662
+      },
+      "validation": {
+        "exists": true,
+        "path": "D:\\RelevanceFlow\\data\\processed\\wands\\validation.parquet",
+        "sha256": "01748c834c5dd5eb32bc311b8ec096b11514a3ae06021732050d3d8ab016cf7a",
+        "size_bytes": 161448
+      }
+    }
+  },
+  "manifest_version": "1",
+  "source": "adopted_existing_artifacts"
+}

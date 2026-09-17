@@ -1,0 +1,50 @@
+# ============================================================
+# RelevanceFlow - Reproducible Training Pipeline
+# ============================================================
+
+pipeline:
+  name: "relevanceflow_training"
+  version: "1.0"
+
+  stages:
+    validate: true
+    preprocess: true
+    split: true
+    features: true
+    train: true
+    evaluate: true
+    register: true
+
+  fail_fast: true
+
+  random_seed: 42
+
+
+artifacts:
+  pipeline_dir: "experiments/pipeline"
+
+  validation_report:
+    path: "experiments/pipeline/validation_report.json"
+
+  manifest:
+    path: "experiments/pipeline/pipeline_manifest.json"
+
+  run_summary:
+    path: "experiments/pipeline/run_summary.json"
+
+
+execution:
+  python_module: "python"
+
+  # Existing project entry points that will be progressively
+  # migrated into the pipeline.
+  existing_scripts:
+    split: "scripts/create_split.py"
+    train_legacy: "scripts/train_ltr.py"
+
+
+reproducibility:
+  record_git_commit: true
+  record_configuration: true
+  record_python_version: true
+  record_platform: true

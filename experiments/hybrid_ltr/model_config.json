@@ -35,5 +35,5 @@
     "semantic_similarity"
   ],
   "registered_model_name": "RelevanceFlowRanker",
-  "registered_model_version": "1"
+  "registered_model_version": "4"
 }

@@ -1,0 +1,43 @@
+{
+  "manifest": "D:\\RelevanceFlow\\experiments\\pipeline\\pipeline_manifest.json",
+  "stages": [
+    {
+      "blocking_errors": 0,
+      "deferred_errors": 1,
+      "stage": "validate",
+      "status": "success",
+      "validation_valid": false
+    },
+    {
+      "stage": "validate",
+      "status": "success"
+    },
+    {
+      "conflicts": 14,
+      "judgments": 231873,
+      "products": 42994,
+      "queries": 480,
+      "stage": "clean",
+      "status": "success"
+    },
+    {
+      "stage": "split",
+      "status": "success"
+    },
+    {
+      "stage": "train",
+      "status": "success"
+    },
+    {
+      "stage": "evaluate",
+      "status": "success"
+    },
+    {
+      "stage": "register",
+      "status": "success"
+    }
+  ],
+  "status": "success",
+  "timestamp": "2026-09-17T09:47:24.558777+00:00",
+  "validation_report": "D:\\RelevanceFlow\\experiments\\pipeline\\validation_report.json"
+}

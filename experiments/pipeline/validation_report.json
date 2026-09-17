@@ -1,0 +1,122 @@
+{
+  "checks": [
+    {
+      "check": "query_required_columns",
+      "message": "All required columns are present.",
+      "status": "PASS"
+    },
+    {
+      "check": "query_not_empty",
+      "message": "480 rows found.",
+      "status": "PASS"
+    },
+    {
+      "check": "query_query_id_unique",
+      "message": "query_id values are unique.",
+      "status": "PASS"
+    },
+    {
+      "check": "query_required_values",
+      "message": "Required fields contain no missing or empty values.",
+      "status": "PASS"
+    },
+    {
+      "check": "query_query_not_empty",
+      "message": "query contains no empty values.",
+      "status": "PASS"
+    },
+    {
+      "check": "query_query_class_missing",
+      "message": "query_class contains 6 missing values. This field is optional and is not used by the initial ranking model.",
+      "status": "WARN"
+    },
+    {
+      "check": "product_required_columns",
+      "message": "All required columns are present.",
+      "status": "PASS"
+    },
+    {
+      "check": "product_not_empty",
+      "message": "42,994 rows found.",
+      "status": "PASS"
+    },
+    {
+      "check": "product_product_id_unique",
+      "message": "product_id values are unique.",
+      "status": "PASS"
+    },
+    {
+      "check": "product_required_values",
+      "message": "Required fields contain no missing or empty values.",
+      "status": "PASS"
+    },
+    {
+      "check": "product_product_name_not_empty",
+      "message": "product_name contains no empty values.",
+      "status": "PASS"
+    },
+    {
+      "check": "product_optional_missing_values",
+      "message": "product contains missing values in optional/descriptive fields: average_rating=9,452, category hierarchy=1,556, product_class=2,852, product_description=6,008, rating_count=9,452, review_count=9,452.",
+      "status": "WARN"
+    },
+    {
+      "check": "label_required_columns",
+      "message": "All required columns are present.",
+      "status": "PASS"
+    },
+    {
+      "check": "label_not_empty",
+      "message": "233,448 rows found.",
+      "status": "PASS"
+    },
+    {
+      "check": "label_required_values",
+      "message": "Required fields contain no missing or empty values.",
+      "status": "PASS"
+    },
+    {
+      "check": "labels_valid",
+      "message": "All labels belong to ['Exact', 'Irrelevant', 'Partial'].",
+      "status": "PASS"
+    },
+    {
+      "check": "judgment_id_unique",
+      "message": "Judgment IDs are unique.",
+      "status": "PASS"
+    },
+    {
+      "check": "query_product_pair_unique",
+      "message": "Found 3,042 rows belonging to 1,467 duplicate query-product pairs.",
+      "status": "WARN"
+    },
+    {
+      "check": "query_product_pair_label_consistency",
+      "message": "Found 14 query-product pairs with conflicting relevance labels.",
+      "status": "FAIL"
+    },
+    {
+      "check": "foreign_key_label_query_id",
+      "message": "All foreign-key values exist in the parent dataset.",
+      "status": "PASS"
+    },
+    {
+      "check": "foreign_key_label_product_id",
+      "message": "All foreign-key values exist in the parent dataset.",
+      "status": "PASS"
+    }
+  ],
+  "errors": [
+    "Found 14 query-product pairs with conflicting relevance labels."
+  ],
+  "failed_checks": 1,
+  "passed_checks": 17,
+  "total_checks": 21,
+  "valid": false,
+  "warning_checks": 3,
+  "warnings": [
+    "query_class contains 6 missing values. This field is optional and is not used by the initial ranking model.",
+    "product contains missing values in optional/descriptive fields: average_rating=9,452, category hierarchy=1,556, product_class=2,852, product_description=6,008, rating_count=9,452, review_count=9,452.",
+    "Found 3,042 rows belonging to 1,467 duplicate query-product pairs."
+  ]
+}
