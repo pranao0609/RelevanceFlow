@@ -31,7 +31,8 @@ artifacts:
 
   run_summary:
     path: "experiments/pipeline/run_summary.json"
-
+  provenance:
+    path: "experiments/pipeline/provenance.json"
 
 execution:
   python_module: "python"

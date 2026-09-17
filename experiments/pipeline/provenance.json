@@ -1,0 +1,103 @@
+{
+  "dataset": {
+    "judgments": {
+      "path": "D:\\RelevanceFlow\\data\\processed\\wands\\judgments.parquet",
+      "sha256": "4e69a1d22fc8369208c6954b18456df29a3ed50c6971eed895018932b979adfe",
+      "size_bytes": 785836
+    },
+    "products": {
+      "path": "D:\\RelevanceFlow\\data\\processed\\wands\\products.parquet",
+      "sha256": "d466eb6c50f1952ef59d1c01a6557eab1856d6b52d57674e09fa07c6f42ea529",
+      "size_bytes": 28799621
+    },
+    "queries": {
+      "path": "D:\\RelevanceFlow\\data\\processed\\wands\\queries.parquet",
+      "sha256": "f4cad0a588d1c35605ab684af2454742c3fa3f669ed0ea2f27175d60d808c724",
+      "size_bytes": 16498
+    }
+  },
+  "evaluation": {
+    "test": {
+      "map@10": 0.8842013888888888,
+      "mrr@10": 0.9432870370370369,
+      "ndcg@10": 0.721926653168238,
+      "queries_evaluated": 72,
+      "recall@10": 0.059788740064578065
+    },
+    "validation": {
+      "map@10": 0.87941192680776,
+      "mrr@10": 0.9421296296296295,
+      "ndcg@10": 0.7034271174778802,
+      "queries_evaluated": 72,
+      "recall@10": 0.08547631915402427
+    }
+  },
+  "features": {
+    "artifacts": {
+      "test": {
+        "path": "D:\\RelevanceFlow\\data\\features\\test_features.parquet",
+        "sha256": "521a2d5f5b1521536056ed56be4d062a708f1ea9eb47900dfabceaac7c8983fc",
+        "size_bytes": 1036810
+      },
+      "train": {
+        "path": "D:\\RelevanceFlow\\data\\features\\train_features.parquet",
+        "sha256": "2beb92e8827d5c8da854e1ff9879361938a696b24b138069aab519c245dd2042",
+        "size_bytes": 3276953
+      },
+      "validation": {
+        "path": "D:\\RelevanceFlow\\data\\features\\validation_features.parquet",
+        "sha256": "8af9c3a2da5689d4b42f539d6b64601c219909ed2c14c9e811e3478c2cb69145",
+        "size_bytes": 698979
+      }
+    },
+    "fingerprint": "14c863f0404ef2eba1c9ccd14c472cf17744ed8c785350c2e53e0512c642b4a9"
+  },
+  "model": {
+    "candidate_alias": "candidate",
+    "champion_alias": "champion",
+    "champion_initialized": false,
+    "mlflow_run_id": "73ea1a006b39467fa0749c418c8685db",
+    "model_version": "7",
+    "registered_model": "RelevanceFlowRanker"
+  },
+  "pipeline": {
+    "name": "relevanceflow_training",
+    "version": "1.0"
+  },
+  "provenance_version": "1",
+  "reproducibility": {
+    "random_seed": 42
+  },
+  "runtime": {
+    "platform": {
+      "machine": "AMD64",
+      "processor": "AMD64 Family 23 Model 104 Stepping 1, AuthenticAMD",
+      "release": "10",
+      "system": "Windows",
+      "version": "10.0.26200"
+    },
+    "python_version": "3.11.8 (tags/v3.11.8:db85d51, Feb  6 2024, 22:03:32) [MSC v.1937 64 bit (AMD64)]"
+  },
+  "source": {
+    "git_branch": "master",
+    "git_commit": "6c97c797fc63e0b9c0709af919126b03a0a25411"
+  },
+  "splits": {
+    "test": {
+      "path": "D:\\RelevanceFlow\\data\\processed\\wands\\test.parquet",
+      "sha256": "ef508f1fd83b3b44a7228faeb46495f58498974332884f277d93956b8b126643",
+      "size_bytes": 216110
+    },
+    "train": {
+      "path": "D:\\RelevanceFlow\\data\\processed\\wands\\train.parquet",
+      "sha256": "b4aae9e8f1d14f1b47ab05e6cd108b846ff28610725a729e9bcf7af51df89326",
+      "size_bytes": 572662
+    },
+    "validation": {
+      "path": "D:\\RelevanceFlow\\data\\processed\\wands\\validation.parquet",
+      "sha256": "01748c834c5dd5eb32bc311b8ec096b11514a3ae06021732050d3d8ab016cf7a",
+      "size_bytes": 161448
+    }
+  },
+  "timestamp_utc": "2026-09-17T10:21:31.144974+00:00"
+}

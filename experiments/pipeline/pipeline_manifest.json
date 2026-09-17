@@ -1,5 +1,5 @@
 {
-  "created_at": "2026-09-17T09:45:20.877099+00:00",
+  "created_at": "2026-09-17T10:19:27.832273+00:00",
   "dataset": {
     "name": "WANDS",
     "source": "Wayfair WANDS",
@@ -7,7 +7,7 @@
   },
   "git": {
     "branch": "master",
-    "commit": "1bf9c1686ddb3cea17b523e58aa1d7b0a0f2f730"
+    "commit": "6c97c797fc63e0b9c0709af919126b03a0a25411"
   },
   "pipeline": {
     "artifacts": {
@@ -15,6 +15,9 @@
         "path": "experiments/pipeline/pipeline_manifest.json"
       },
       "pipeline_dir": "experiments/pipeline",
+      "provenance": {
+        "path": "experiments/pipeline/provenance.json"
+      },
       "run_summary": {
         "path": "experiments/pipeline/run_summary.json"
       },

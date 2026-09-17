@@ -583,6 +583,14 @@ def main() -> None:
         # ---------------------------------------------------------
         # Final output
         # ---------------------------------------------------------
+        active_run = mlflow.active_run()
+
+        if active_run is None:
+            raise RuntimeError(
+                "No active MLflow run found while creating training result."
+            )
+
+        run_id = active_run.info.run_id
 
         print("\n" + "=" * 55)
         print("MLflow Model Registry")
@@ -611,6 +619,37 @@ def main() -> None:
         print(FEATURE_IMPORTANCE_PATH)
 
         print("\nMLflow tracking and model " "registry completed.")
+
+    training_result = {
+        "mlflow_run_id": run_id,
+        "registered_model": registry_model_name,
+        "model_version": model_version,
+        "candidate_alias": candidate_alias,
+        "champion_alias": champion_alias,
+        "champion_initialized": not champion_exists,
+        "validation": validation_metrics,
+        "test": test_metrics,
+    }
+
+    training_result_path = (
+        PROJECT_ROOT / "experiments" / "hybrid_ltr" / "training_result.json"
+    )
+
+    with training_result_path.open(
+        "w",
+        encoding="utf-8",
+    ) as file:
+        json.dump(
+            training_result,
+            file,
+            indent=2,
+            sort_keys=True,
+        )
+        file.write("\n")
+
+    print()
+    print("Training result saved:")
+    print(training_result_path)
 
 
 if __name__ == "__main__":

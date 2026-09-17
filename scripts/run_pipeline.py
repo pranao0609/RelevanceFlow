@@ -1,8 +1,8 @@
 from __future__ import annotations
 
+import json
 import sys
 from pathlib import Path
-
 
 from relevanceflow.data.pipeline_stages import (
     clean_wands_dataset,
@@ -21,6 +21,10 @@ from relevanceflow.utils.pipeline import (
     run_stage,
     utc_now,
     write_json,
+)
+from relevanceflow.utils.provenance import (
+    build_provenance,
+    save_provenance,
 )
 
 # Define python_executable pointing to the active virtualenv interpreter
@@ -350,9 +354,9 @@ def main() -> int:
                 manifest,
             )
 
-            print()
-            print("Feature cache manifest updated.")
-            print(f"Manifest: {manifest_path}")
+        print()
+        print("Feature cache manifest updated.")
+        print(f"Manifest: {manifest_path}")
 
         # ---------------------------------------------------------------
         # 5. TRAIN + EVALUATE + REGISTER
@@ -384,7 +388,89 @@ def main() -> int:
             "status": "success",
         }
     )
+    print()
+    print("=" * 70)
+    print("PIPELINE PROVENANCE")
+    print("=" * 70)
+    training_result_path = (
+        PROJECT_ROOT / "experiments" / "hybrid_ltr" / "training_result.json"
+    )
 
+    if not training_result_path.exists():
+        raise RuntimeError(
+            "Training completed but training_result.json was not created."
+        )
+
+    with training_result_path.open(
+        "r",
+        encoding="utf-8",
+    ) as file:
+        training_result = json.load(file)
+
+    feature_manifest_path = (
+        PROJECT_ROOT / config["features_cache"]["features_cache"]["manifest_path"]
+    )
+
+    if not feature_manifest_path.exists():
+        raise RuntimeError("Feature cache manifest does not exist.")
+
+    with feature_manifest_path.open(
+        "r",
+        encoding="utf-8",
+    ) as file:
+        feature_manifest = json.load(file)
+    dataset_artifacts = {
+        "products": (PROJECT_ROOT / "data/processed/wands/products.parquet"),
+        "queries": (PROJECT_ROOT / "data/processed/wands/queries.parquet"),
+        "judgments": (PROJECT_ROOT / "data/processed/wands/judgments.parquet"),
+    }
+    split_artifacts = {
+        "train": (PROJECT_ROOT / "data/processed/wands/train.parquet"),
+        "validation": (PROJECT_ROOT / "data/processed/wands/validation.parquet"),
+        "test": (PROJECT_ROOT / "data/processed/wands/test.parquet"),
+    }
+    feature_artifacts = {
+        name: PROJECT_ROOT / path
+        for name, path in config["features_cache"]["features_cache"][
+            "artifacts"
+        ].items()
+    }
+    pipeline_config = config["pipeline"]
+    provenance = build_provenance(
+        project_root=PROJECT_ROOT,
+        pipeline_name=pipeline_config["pipeline"]["name"],
+        pipeline_version=pipeline_config["pipeline"]["version"],
+        random_seed=pipeline_config["pipeline"]["random_seed"],
+        feature_fingerprint=feature_manifest["fingerprint"],
+        dataset_artifacts=dataset_artifacts,
+        split_artifacts=split_artifacts,
+        feature_artifacts=feature_artifacts,
+        model_info={
+            "mlflow_run_id": training_result["mlflow_run_id"],
+            "registered_model": training_result["registered_model"],
+            "model_version": training_result["model_version"],
+            "candidate_alias": training_result["candidate_alias"],
+            "champion_alias": training_result["champion_alias"],
+            "champion_initialized": (training_result["champion_initialized"]),
+        },
+        evaluation_metrics={
+            "validation": training_result["validation"],
+            "test": training_result["test"],
+        },
+    )
+    provenance_path = PROJECT_ROOT / pipeline_config["artifacts"]["provenance"]["path"]
+    save_provenance(
+        provenance_path,
+        provenance,
+    )
+    print()
+    print("Provenance saved:")
+    print(provenance_path)
+    print()
+    print(f"Feature fingerprint: " f"{feature_manifest['fingerprint']}")
+    print(f"Registered model: " f"{training_result['registered_model']}")
+    print(f"Model version: " f"{training_result['model_version']}")
+    print(f"MLflow run: " f"{training_result['mlflow_run_id']}")
     # ---------------------------------------------------------------
     # Pipeline summary
     # ---------------------------------------------------------------

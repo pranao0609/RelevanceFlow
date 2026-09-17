@@ -1,0 +1,22 @@
+{
+  "candidate_alias": "candidate",
+  "champion_alias": "champion",
+  "champion_initialized": false,
+  "mlflow_run_id": "73ea1a006b39467fa0749c418c8685db",
+  "model_version": "7",
+  "registered_model": "RelevanceFlowRanker",
+  "test": {
+    "map@10": 0.8842013888888888,
+    "mrr@10": 0.9432870370370369,
+    "ndcg@10": 0.721926653168238,
+    "queries_evaluated": 72,
+    "recall@10": 0.059788740064578065
+  },
+  "validation": {
+    "map@10": 0.87941192680776,
+    "mrr@10": 0.9421296296296295,
+    "ndcg@10": 0.7034271174778802,
+    "queries_evaluated": 72,
+    "recall@10": 0.08547631915402427
+  }
+}
