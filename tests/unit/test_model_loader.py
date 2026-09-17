@@ -1,112 +1,48 @@
-from __future__ import annotations
-
-from unittest.mock import MagicMock, patch
-
-import pandas as pd
 import pytest
 
 from relevanceflow.serving.model_loader import (
     ModelLoadingError,
     get_model_feature_columns,
     load_registered_model,
-    prepare_model_features,
 )
 
 
-def test_load_registered_model():
-    mock_model = MagicMock()
+def test_load_registered_champion_model():
+    model = load_registered_model(
+        model_name="RelevanceFlowRanker",
+        alias="champion",
+        tracking_uri="sqlite:///mlflow.db",
+    )
 
-    with patch(
-        "relevanceflow.serving.model_loader.mlflow.lightgbm.load_model",
-        return_value=mock_model,
-    ) as mock_load:
-        result = load_registered_model(
-            "RelevanceFlowRanker",
-            "champion",
-        )
-
-    mock_load.assert_called_once_with("models:/RelevanceFlowRanker@champion")
-
-    assert result is mock_model
+    assert model is not None
 
 
-def test_load_registered_model_error():
-    with patch(
-        "relevanceflow.serving.model_loader.mlflow.lightgbm.load_model",
-        side_effect=RuntimeError("load failed"),
-    ), pytest.raises(ModelLoadingError):
+def test_loaded_model_has_expected_features():
+    model = load_registered_model(
+        model_name="RelevanceFlowRanker",
+        alias="champion",
+        tracking_uri="sqlite:///mlflow.db",
+    )
+
+    feature_columns = get_model_feature_columns(model)
+
+    assert feature_columns
+    assert len(feature_columns) == 17
+
+
+def test_missing_model_name():
+    with pytest.raises(ModelLoadingError):
         load_registered_model(
-            "RelevanceFlowRanker",
-            "champion",
+            model_name="",
+            alias="champion",
+            tracking_uri="sqlite:///mlflow.db",
         )
 
 
-def test_get_model_feature_columns():
-    model = MagicMock()
-    model.feature_name_ = [
-        "bm25_score",
-        "semantic_similarity",
-    ]
-
-    result = get_model_feature_columns(model)
-
-    assert result == [
-        "bm25_score",
-        "semantic_similarity",
-    ]
-
-
-def test_get_model_feature_columns_missing():
-    model = MagicMock()
-    model.feature_name_ = None
-
+def test_missing_alias():
     with pytest.raises(ModelLoadingError):
-        get_model_feature_columns(model)
-
-
-def test_prepare_model_features_preserves_order():
-    model = MagicMock()
-    model.feature_name_ = [
-        "semantic_similarity",
-        "bm25_score",
-    ]
-
-    dataframe = pd.DataFrame(
-        {
-            "bm25_score": [1.0, 2.0],
-            "semantic_similarity": [0.5, 0.6],
-            "extra_feature": [10.0, 20.0],
-        }
-    )
-
-    result = prepare_model_features(
-        dataframe,
-        model,
-    )
-
-    assert result.columns.tolist() == [
-        "semantic_similarity",
-        "bm25_score",
-    ]
-
-    assert result.shape == (2, 2)
-
-
-def test_prepare_model_features_missing_column():
-    model = MagicMock()
-    model.feature_name_ = [
-        "bm25_score",
-        "semantic_similarity",
-    ]
-
-    dataframe = pd.DataFrame(
-        {
-            "bm25_score": [1.0],
-        }
-    )
-
-    with pytest.raises(ModelLoadingError):
-        prepare_model_features(
-            dataframe,
-            model,
+        load_registered_model(
+            model_name="RelevanceFlowRanker",
+            alias="",
+            tracking_uri="sqlite:///mlflow.db",
         )

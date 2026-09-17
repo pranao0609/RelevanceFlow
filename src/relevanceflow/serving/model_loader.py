@@ -1,67 +1,74 @@
-"""MLflow registered-model loading utilities."""
-
 from __future__ import annotations
 
-import mlflow.lightgbm
-import pandas as pd
+from typing import Any
+
+import mlflow
 
 
 class ModelLoadingError(RuntimeError):
-    """Raised when a registered model cannot be loaded correctly."""
+    """Raised when the production ranking model cannot be loaded."""
+
+
+def configure_mlflow(tracking_uri: str) -> None:
+    """Configure MLflow tracking for the serving process."""
+    if not tracking_uri:
+        raise ModelLoadingError("MLflow tracking URI is empty.")
+
+    mlflow.set_tracking_uri(tracking_uri)
 
 
 def load_registered_model(
     model_name: str,
     alias: str,
-):
-    """Load a registered LightGBM model through an MLflow alias."""
+    tracking_uri: str | None = None,
+) -> Any:
+    """Load a registered MLflow model by alias."""
+
+    if tracking_uri:
+        configure_mlflow(tracking_uri)
+
+    if not model_name:
+        raise ModelLoadingError("Model name is empty.")
+
+    if not alias:
+        raise ModelLoadingError("Model alias is empty.")
 
     model_uri = f"models:/{model_name}@{alias}"
 
     try:
-        return mlflow.lightgbm.load_model(model_uri)
+        return mlflow.pyfunc.load_model(model_uri)
     except Exception as exc:
         raise ModelLoadingError(
-            f"Unable to load model '{model_name}@{alias}'."
+            f"Failed to load registered model '{model_uri}': {exc}"
         ) from exc
 
 
-def get_model_feature_columns(
-    model,
-) -> list[str]:
-    """Return the exact feature columns used by the trained model."""
+def get_model_feature_columns(model: Any) -> list[str]:
+    """Extract feature names expected by the underlying LightGBM model."""
 
-    feature_columns = getattr(
-        model,
-        "feature_name_",
-        None,
-    )
+    try:
+        booster = model._model_impl.lgb_model.booster_
+        feature_names = booster.feature_name()
+    except Exception as exc:
+        raise ModelLoadingError(
+            f"Unable to read LightGBM feature names: {exc}"
+        ) from exc
 
-    if not feature_columns:
-        raise ModelLoadingError("Registered model does not expose feature_name_.")
+    if not feature_names:
+        raise ModelLoadingError("Loaded LightGBM model has no feature names.")
 
-    return list(feature_columns)
+    return list(feature_names)
 
 
 def prepare_model_features(
-    dataframe: pd.DataFrame,
-    model,
-) -> pd.DataFrame:
-    """Prepare inference features using the trained model schema."""
+    features,
+    feature_columns: list[str],
+):
+    """Select model features in the exact training order."""
 
-    feature_columns = get_model_feature_columns(model)
+    missing = [column for column in feature_columns if column not in features.columns]
 
-    missing_columns = [
-        column for column in feature_columns if column not in dataframe.columns
-    ]
+    if missing:
+        raise ModelLoadingError(f"Missing model features: {missing}")
 
-    if missing_columns:
-        raise ModelLoadingError(
-            "Input data is missing required model features: "
-            + ", ".join(missing_columns)
-        )
-
-    return dataframe.loc[
-        :,
-        feature_columns,
-    ].copy()
+    return features.loc[:, feature_columns]
