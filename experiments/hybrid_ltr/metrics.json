@@ -2,11 +2,16 @@
   "model": "LightGBM LambdaRank",
   "objective": "lambdarank",
   "features": 17,
+  "registered_model_name": "RelevanceFlowRanker",
+  "registered_model_version": "1",
+  "candidate_alias": "candidate",
+  "champion_alias": "champion",
+  "champion_initialized": true,
   "train_queries": 336,
   "validation_queries": 72,
   "test_queries": 72,
   "best_iteration": 7,
-  "training_time_seconds": 2.2391789000248536,
+  "training_time_seconds": 2.0858354999218136,
   "validation": {
     "queries_evaluated": 72,
     "recall@10": 0.08903797130602459,
@@ -21,7 +26,7 @@
     "ndcg@10": 0.7423509690302058,
     "map@10": 0.8771301807760141
   },
-  "validation_inference_time_ms": 43.84800000116229,
-  "test_inference_time_ms": 57.07930005155504,
-  "total_runtime_seconds": 3.2001129999989644
+  "validation_inference_time_ms": 36.58360010012984,
+  "test_inference_time_ms": 50.14049995224923,
+  "total_runtime_seconds": 36.89991919999011
 }

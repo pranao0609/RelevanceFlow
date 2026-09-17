@@ -55,6 +55,9 @@ mlflow:
   enabled: true
   tracking_uri: "sqlite:///mlflow.db"
   experiment_name: "relevanceflow-ranking"
+  registered_model_name: "RelevanceFlowRanker"
+  candidate_alias: "candidate"
+  champion_alias: "champion"
 
 # ------------------------------------------------------------
 # AWS

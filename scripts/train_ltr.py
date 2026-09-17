@@ -5,6 +5,7 @@ import time
 from pathlib import Path
 
 import mlflow
+import mlflow.lightgbm
 import pandas as pd
 
 from relevanceflow.evaluation.common_ranking import evaluate_rankings
@@ -14,8 +15,15 @@ from relevanceflow.utils.mlflow_utils import (
     log_artifact_if_exists,
     log_git_metadata,
     log_metrics,
-    log_params,
     start_run,
+)
+from relevanceflow.utils.model_registry import (
+    get_candidate_alias,
+    get_champion_alias,
+    get_mlflow_client,
+    get_registry_model_name,
+    set_alias,
+    set_model_version_metadata,
 )
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -119,7 +127,7 @@ def prepare_ranking_inputs(
 
 
 def main() -> None:
-    """Train, evaluate, and track the hybrid LightGBM ranking model."""
+    """Train, evaluate, track, and register the ranking model."""
 
     mlflow_config = load_configs()
 
@@ -168,11 +176,11 @@ def main() -> None:
 
         model = LightGBMLTR(ltr_config)
 
-        print("\nTraining hybrid LightGBM LambdaRank model...")
-
         # ---------------------------------------------------------
         # Train
         # ---------------------------------------------------------
+
+        print("\nTraining hybrid LightGBM LambdaRank model...")
 
         training_start = time.perf_counter()
 
@@ -189,7 +197,7 @@ def main() -> None:
         # MLflow parameters
         # ---------------------------------------------------------
 
-        log_params(
+        mlflow.log_params(
             {
                 "model_type": "LightGBM LambdaRank",
                 "objective": "lambdarank",
@@ -199,9 +207,9 @@ def main() -> None:
                 "learning_rate": ltr_config.learning_rate,
                 "num_leaves": ltr_config.num_leaves,
                 "max_depth": ltr_config.max_depth,
-                "min_child_samples": ltr_config.min_child_samples,
+                "min_child_samples": (ltr_config.min_child_samples),
                 "subsample": ltr_config.subsample,
-                "colsample_bytree": ltr_config.colsample_bytree,
+                "colsample_bytree": (ltr_config.colsample_bytree),
                 "reg_alpha": ltr_config.reg_alpha,
                 "reg_lambda": ltr_config.reg_lambda,
                 "random_state": ltr_config.random_state,
@@ -251,6 +259,10 @@ def main() -> None:
             "dataset",
             "WANDS",
         )
+
+        # ---------------------------------------------------------
+        # Git metadata
+        # ---------------------------------------------------------
 
         git_commit = log_git_metadata(PROJECT_ROOT)
 
@@ -342,7 +354,7 @@ def main() -> None:
         feature_importance = pd.DataFrame(
             {
                 "feature": model.feature_columns,
-                "importance": model.model.feature_importances_,
+                "importance": (model.model.feature_importances_),
             }
         ).sort_values(
             "importance",
@@ -365,6 +377,111 @@ def main() -> None:
         )
 
         # ---------------------------------------------------------
+        # MLflow Model Registry
+        # ---------------------------------------------------------
+
+        registry_model_name = get_registry_model_name(mlflow_config)
+
+        candidate_alias = get_candidate_alias(mlflow_config)
+
+        champion_alias = get_champion_alias(mlflow_config)
+
+        print("\nRegistering model in MLflow Model Registry...")
+
+        model_info = mlflow.lightgbm.log_model(
+            model.model,
+            name="ranker",
+            registered_model_name=registry_model_name,
+            skops_trusted_types=[
+                "lightgbm.sklearn.LGBMRanker",
+            ],
+        )
+        model_version = str(model_info.registered_model_version)
+
+        client = get_mlflow_client()
+
+        # ---------------------------------------------------------
+        # Model version metadata
+        # ---------------------------------------------------------
+
+        set_model_version_metadata(
+            client=client,
+            model_name=registry_model_name,
+            version=model_version,
+            tags={
+                "model_family": ("LightGBM LambdaRank"),
+                "task": ("product_search_relevance_ranking"),
+                "dataset": "WANDS",
+                "validation_status": "passed",
+                "model_role": "candidate",
+                "primary_metric": "NDCG@10",
+                "git_commit": git_commit,
+            },
+            description=(
+                "RelevanceFlow LightGBM LambdaRank "
+                "model trained on WANDS using "
+                "query-grouped splits."
+            ),
+        )
+
+        # ---------------------------------------------------------
+        # Candidate alias
+        # ---------------------------------------------------------
+
+        set_alias(
+            client=client,
+            model_name=registry_model_name,
+            alias=candidate_alias,
+            version=model_version,
+        )
+
+        # ---------------------------------------------------------
+        # Champion initialization
+        # ---------------------------------------------------------
+
+        champion_exists = True
+
+        try:
+            client.get_model_version_by_alias(
+                name=registry_model_name,
+                alias=champion_alias,
+            )
+        except Exception:  # noqa: BLE001
+            champion_exists = False
+
+        if not champion_exists:
+            set_alias(
+                client=client,
+                model_name=registry_model_name,
+                alias=champion_alias,
+                version=model_version,
+            )
+
+        # ---------------------------------------------------------
+        # Registry metadata on MLflow run
+        # ---------------------------------------------------------
+
+        mlflow.set_tag(
+            "registered_model_name",
+            registry_model_name,
+        )
+
+        mlflow.set_tag(
+            "registered_model_version",
+            model_version,
+        )
+
+        mlflow.set_tag(
+            "candidate_alias",
+            candidate_alias,
+        )
+
+        mlflow.set_tag(
+            "champion_alias",
+            champion_alias,
+        )
+
+        # ---------------------------------------------------------
         # Save metrics artifact
         # ---------------------------------------------------------
 
@@ -372,13 +489,18 @@ def main() -> None:
             "model": "LightGBM LambdaRank",
             "objective": "lambdarank",
             "features": len(model.feature_columns),
+            "registered_model_name": (registry_model_name),
+            "registered_model_version": (model_version),
+            "candidate_alias": candidate_alias,
+            "champion_alias": champion_alias,
+            "champion_initialized": (not champion_exists),
             "train_queries": int(train["query_id"].nunique()),
             "validation_queries": int(validation["query_id"].nunique()),
             "test_queries": int(test["query_id"].nunique()),
             "best_iteration": (
                 int(best_iteration) if best_iteration is not None else None
             ),
-            "training_time_seconds": training_time,
+            "training_time_seconds": (training_time),
             "validation": validation_metrics,
             "test": test_metrics,
             "validation_inference_time_ms": (validation_inference_time * 1000),
@@ -401,19 +523,21 @@ def main() -> None:
         # ---------------------------------------------------------
 
         config_output = {
-            "n_estimators": ltr_config.n_estimators,
-            "learning_rate": ltr_config.learning_rate,
-            "num_leaves": ltr_config.num_leaves,
-            "max_depth": ltr_config.max_depth,
-            "min_child_samples": ltr_config.min_child_samples,
-            "subsample": ltr_config.subsample,
-            "colsample_bytree": ltr_config.colsample_bytree,
-            "reg_alpha": ltr_config.reg_alpha,
-            "reg_lambda": ltr_config.reg_lambda,
-            "random_state": ltr_config.random_state,
+            "n_estimators": (ltr_config.n_estimators),
+            "learning_rate": (ltr_config.learning_rate),
+            "num_leaves": (ltr_config.num_leaves),
+            "max_depth": (ltr_config.max_depth),
+            "min_child_samples": (ltr_config.min_child_samples),
+            "subsample": (ltr_config.subsample),
+            "colsample_bytree": (ltr_config.colsample_bytree),
+            "reg_alpha": (ltr_config.reg_alpha),
+            "reg_lambda": (ltr_config.reg_lambda),
+            "random_state": (ltr_config.random_state),
             "eval_at": list(ltr_config.eval_at),
             "early_stopping_rounds": (ltr_config.early_stopping_rounds),
-            "feature_columns": model.feature_columns,
+            "feature_columns": (model.feature_columns),
+            "registered_model_name": (registry_model_name),
+            "registered_model_version": (model_version),
         }
 
         with CONFIG_PATH.open(
@@ -432,15 +556,15 @@ def main() -> None:
 
         log_metrics(
             {
-                "validation_recall_at_10": validation_metrics["recall@10"],
-                "validation_mrr_at_10": validation_metrics["mrr@10"],
-                "validation_ndcg_at_10": validation_metrics["ndcg@10"],
-                "validation_map_at_10": validation_metrics["map@10"],
-                "test_recall_at_10": test_metrics["recall@10"],
-                "test_mrr_at_10": test_metrics["mrr@10"],
-                "test_ndcg_at_10": test_metrics["ndcg@10"],
-                "test_map_at_10": test_metrics["map@10"],
-                "training_time_seconds": training_time,
+                "validation_recall_at_10": (validation_metrics["recall@10"]),
+                "validation_mrr_at_10": (validation_metrics["mrr@10"]),
+                "validation_ndcg_at_10": (validation_metrics["ndcg@10"]),
+                "validation_map_at_10": (validation_metrics["map@10"]),
+                "test_recall_at_10": (test_metrics["recall@10"]),
+                "test_mrr_at_10": (test_metrics["mrr@10"]),
+                "test_ndcg_at_10": (test_metrics["ndcg@10"]),
+                "test_map_at_10": (test_metrics["map@10"]),
+                "training_time_seconds": (training_time),
                 "validation_inference_time_ms": (validation_inference_time * 1000),
                 "test_inference_time_ms": (test_inference_time * 1000),
             }
@@ -451,19 +575,42 @@ def main() -> None:
         # ---------------------------------------------------------
 
         log_artifact_if_exists(METRICS_PATH)
+
         log_artifact_if_exists(CONFIG_PATH)
+
         log_artifact_if_exists(FEATURE_IMPORTANCE_PATH)
 
         # ---------------------------------------------------------
         # Final output
         # ---------------------------------------------------------
 
+        print("\n" + "=" * 55)
+        print("MLflow Model Registry")
+        print("=" * 55)
+
+        print(f"Registered model: " f"{registry_model_name}")
+
+        print(f"Model version: " f"{model_version}")
+
+        print(f"Candidate: " f"{registry_model_name}" f"@{candidate_alias}")
+
+        if not champion_exists:
+            print(
+                f"Champion initialized: " f"{registry_model_name}" f"@{champion_alias}"
+            )
+        else:
+            print(
+                f"Existing champion preserved: "
+                f"{registry_model_name}"
+                f"@{champion_alias}"
+            )
+
         print("\nArtifacts saved:")
         print(METRICS_PATH)
         print(CONFIG_PATH)
         print(FEATURE_IMPORTANCE_PATH)
 
-        print("\nMLflow tracking completed.")
+        print("\nMLflow tracking and model " "registry completed.")
 
 
 if __name__ == "__main__":

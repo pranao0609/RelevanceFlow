@@ -33,5 +33,7 @@
     "product_class_match",
     "phrase_match",
     "semantic_similarity"
-  ]
+  ],
+  "registered_model_name": "RelevanceFlowRanker",
+  "registered_model_version": "1"
 }
