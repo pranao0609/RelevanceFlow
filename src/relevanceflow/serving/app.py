@@ -6,7 +6,10 @@ from contextlib import asynccontextmanager
 from functools import lru_cache
 
 from fastapi import Depends, FastAPI, HTTPException, Request
+from sqlalchemy.orm import Session
 
+from relevanceflow.database.repository import create_ranking_request
+from relevanceflow.database.session import get_session
 from relevanceflow.serving.inference import (
     InferenceConfig,
     RankingInferenceService,
@@ -114,10 +117,15 @@ def health() -> HealthResponse:
 @app.post("/rank", response_model=RankingResponse)
 def rank(
     request: RankingRequest,
+    raw_request: Request,
     service: RankingInferenceService = Depends(get_inference_service),
+    db: Session = Depends(get_session),
 ) -> RankingResponse:
     """Rank candidate products for a search query."""
-    getattr(request, "state", None)
+
+    start_time = time.perf_counter()
+
+    request_id = getattr(raw_request.state, "request_id", str(uuid.uuid4()))
 
     try:
         results = service.rank(
@@ -126,11 +134,36 @@ def rank(
             top_k=len(request.products),
         )
 
+        elapsed_ms = (time.perf_counter() - start_time) * 1000
+
+        try:
+            config = InferenceConfig()
+
+            create_ranking_request(
+                db,
+                request_id=request_id,
+                query=request.query,
+                candidate_count=len(request.products),
+                top_k=len(results),
+                model_name=config.model_name,
+                model_alias=config.model_alias,
+                latency_ms=elapsed_ms,
+            )
+
+        except Exception:
+            logger.exception(
+                "ranking_persistence_failed request_id=%s",
+                request_id,
+            )
+
         logger.info(
-            "ranking_success query_length=%d " "candidate_count=%d result_count=%d",
+            "ranking_success request_id=%s query_length=%d "
+            "candidate_count=%d result_count=%d latency_ms=%.2f",
+            request_id,
             len(request.query),
             len(request.products),
             len(results),
+            elapsed_ms,
         )
 
         return RankingResponse(
@@ -140,7 +173,8 @@ def rank(
 
     except ModelLoadingError as exc:
         logger.error(
-            "ranking_model_unavailable error=%s",
+            "ranking_model_unavailable request_id=%s error=%s",
+            request_id,
             exc,
         )
 
@@ -151,7 +185,8 @@ def rank(
 
     except ValueError as exc:
         logger.warning(
-            "ranking_invalid_request error=%s",
+            "ranking_invalid_request request_id=%s error=%s",
+            request_id,
             exc,
         )
 
@@ -161,7 +196,10 @@ def rank(
         ) from exc
 
     except Exception as exc:
-        logger.exception("ranking_inference_failed error")
+        logger.exception(
+            "ranking_inference_failed request_id=%s",
+            request_id,
+        )
 
         raise HTTPException(
             status_code=500,
