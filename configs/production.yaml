@@ -41,11 +41,9 @@ database:
 # ------------------------------------------------------------
 
 redis:
-  url_env: "REDIS_URL"
-
   enabled: false
-
-  ttl_seconds: 3600
+  url: "redis://localhost:6379/0"
+  ttl_seconds: 300
 
 # ------------------------------------------------------------
 # MLflow

@@ -28,6 +28,7 @@ dependencies = [
     "pydantic",
     "sqlalchemy",
     "psycopg[binary]",
+    "redis",
 ]
 
 [tool.setuptools]
