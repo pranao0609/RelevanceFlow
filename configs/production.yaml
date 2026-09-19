@@ -41,7 +41,7 @@ database:
 # ------------------------------------------------------------
 
 redis:
-  enabled: flase
+  enabled: false
   url: "redis://localhost:6379/0"
   ttl_seconds: 300
 
